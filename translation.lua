@@ -1,4 +1,5 @@
-Translation = {}
+---@class vorp_loot_translation
+local Translation = {}
 
 Translation.Langs = {
   English = {
@@ -79,4 +80,8 @@ Translation.Langs = {
     currency = " $.",
     notifytitle = "Saqueo"
   },
+}
+
+return {
+  Translation = Translation
 }

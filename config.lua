@@ -1,7 +1,8 @@
-Config = {}
+---@class vorp_loot
+local Config = {}
 
 -- Language setting - English | Portuguese_PT | Portuguese_BR | French | German | Spanish
-Lang = "English"
+Config.Lang = "English"
 
 -- NPC Looting Settings
 Config.timeout = 5 -- default is 5 minutes, Time in milliseconds for how long this NPC/netid can be looted
@@ -47,4 +48,8 @@ Config.weapons = {
     { name = "WEAPON_REVOLVER_CATTLEMAN", label = "Cattleman Revolver" },
     { name = "WEAPON_REPEATER_CARBINE",   label = "Carbine Repeater" },
     { name = "WEAPON_RIFLE_VARMINT",      label = "Varmint Rifle" }
+}
+
+return {
+  Config = Config
 }
