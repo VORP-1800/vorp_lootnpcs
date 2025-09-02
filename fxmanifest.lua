@@ -9,7 +9,7 @@ repository 'https://github.com/VORPCORE/vorp_lootnpcs'
 
 shared_script '@vorp_lib/import.lua'
 
-client_scripts 'client/client.lua'
+client_script 'client/client.lua'
 
 server_script 'server/server.lua'
 
