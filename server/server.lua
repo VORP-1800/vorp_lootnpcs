@@ -1,13 +1,14 @@
-local Lib <const> = Import({'/config','/translation'})
+local Lib <const> = Import({ '/config', '/translation' })
 local Config <const> = Lib.Config --[[@as vorp_loot]]
 local Translation <const> = Lib.Translation --[[@as vorp_loot_translation]]
 
+local Core = exports.vorp_core:GetCore()
 local T <const> = Translation.Langs[Config.Lang]
 local lootedNpcs <const> = {}
 
 RegisterServerEvent('npcloot:give_reward', function(netid)
     local _source = source
-    local user <const> = LIB.CORE.getUser(_source)
+    local user <const> = Core.getUser(_source)
     if not user then return end
 
     local entity <const> = NetworkGetEntityFromNetworkId(netid)
@@ -46,21 +47,21 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
 
             local canCarryWeapons <const> = exports.vorp_inventory:canCarryWeapons(_source, 1, nil, Config.weapons[chance1].name)
             if not canCarryWeapons then
-                return LIB.NOTIFY:RightTip(_source, T.invFullWeapon, 3000)
+                return Core.NotifyRightTip(_source, T.invFullWeapon, 3000)
             end
 
             exports.vorp_inventory:createWeapon(_source, Config.weapons[chance1].name, ammo, {})
 
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.youGot .. Config.weapons[chance1].label, 3000)
+                Core.NotifyRightTip(_source, T.youGot .. Config.weapons[chance1].label, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, "" .. T.youGot .. "" .. Config.weapons[chance1].label .. "", "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
+                Core.NotifyLeft(_source, T.notifytitle, "" .. T.youGot .. "" .. Config.weapons[chance1].label .. "", "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
             end
         else -- info on finding nothing
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.noWeapon, 3000)
+                Core.NotifyRightTip(_source, T.noWeapon, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, "" .. T.noWeapon .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
+                Core.NotifyLeft(_source, T.notifytitle, "" .. T.noWeapon .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
             end
         end
     end
@@ -72,15 +73,15 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
             character.addCurrency(0, Config.money[item_type])
 
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.youGot .. string.format("%.2f", Config.money[item_type]) .. T.currency, 3000)
+                Core.NotifyRightTip(_source, T.youGot .. string.format("%.2f", Config.money[item_type]) .. T.currency, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, T.youGot .. string.format("%.2f", Config.money[item_type]) .. T.currency, "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
+                Core.NotifyLeft(_source, T.notifytitle, T.youGot .. string.format("%.2f", Config.money[item_type]) .. T.currency, "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
             end
         else -- info on finding nothing
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.noMoney, 3000)
+                Core.NotifyRightTip(_source, T.noMoney, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, "" .. T.noMoney .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
+                Core.NotifyLeft(_source, T.notifytitle, "" .. T.noMoney .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
             end
         end
     end
@@ -92,15 +93,15 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
             local item_type <const> = math.random(1, #Config.gold)
             character.addCurrency(1, Config.gold[item_type])
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.youGot .. Config.gold[item_type] .. T.nugget, 3000)
+                Core.NotifyRightTip(_source, T.youGot .. Config.gold[item_type] .. T.nugget, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, T.youGot .. Config.gold[item_type] .. T.nugget, "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
+                Core.NotifyLeft(_source, T.notifytitle, T.youGot .. Config.gold[item_type] .. T.nugget, "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
             end
         else
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.noGold, 3000)
+                Core.NotifyRightTip(_source, T.noGold, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, "" .. T.noGold .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
+                Core.NotifyLeft(_source, T.notifytitle, "" .. T.noGold .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
             end
         end
     end
@@ -118,15 +119,15 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
             exports.vorp_inventory:addItem(_source, Config.items[chance4].name, count)
 
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.youGot .. Config.items[chance4].label, 3000)
+                Core.NotifyRightTip(_source, T.youGot .. Config.items[chance4].label, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, T.youGot .. Config.items[chance4].label, "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
+                Core.NotifyLeft(_source, T.notifytitle, T.youGot .. Config.items[chance4].label, "BLIPS", "blip_ambient_bounty_target", 3000, "COLOR_GREEN")
             end
         else
             if Config.useNotifyRight then
-                LIB.NOTIFY:RightTip(_source, T.noItem, 3000)
+                Core.NotifyRightTip(_source, T.noItem, 3000)
             else
-                LIB.NOTIFY:Left(_source, T.notifytitle, "" .. T.noItem .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
+                Core.NotifyLeft(_source, T.notifytitle, "" .. T.noItem .. "", "BLIPS", "blip_destroy", 3000, "COLOR_RED")
             end
         end
     end
