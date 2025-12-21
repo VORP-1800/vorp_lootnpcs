@@ -1,9 +1,8 @@
 local Lib <const> = Import({ '/config', '/translation' })
 local Config <const> = Lib.Config --[[@as vorp_loot]]
-local Translation <const> = Lib.Translation --[[@as vorp_loot_translation]]
+local T <const> = Lib.Translation[Config.Lang] --[[@as vorp_loot_translation]]
 
 local Core = exports.vorp_core:GetCore()
-local T <const> = Translation.Langs[Config.Lang]
 local lootedNpcs <const> = {}
 
 RegisterServerEvent('npcloot:give_reward', function(netid)
