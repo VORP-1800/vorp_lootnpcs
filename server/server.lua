@@ -1,6 +1,6 @@
-local Lib <const> = Import({ '/config', '/translation' })
-local Config <const> = Lib.Config --[[@as vorp_loot]]
-local T <const> = Lib.Translation[Config.Lang] --[[@as vorp_loot_translation]]
+local LIB <const> = Import({ '/config', '/translation' })
+local Config <const> = LIB.Config --[[@as vorp_loot]]
+local T <const> = LIB.Translation[Config.Lang] --[[@as vorp_loot_translation]]
 
 local Core = exports.vorp_core:GetCore()
 local lootedNpcs <const> = {}

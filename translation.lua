@@ -1,7 +1,5 @@
 ---@class vorp_loot_translation
-local Translation = {}
-
-Translation.Langs = {
+local Translation = {
   English = {
     invFullWeapon = "You can't carry any more WEAPONS.",
     invFullItems = "You can't carry any more ITEMS.",
