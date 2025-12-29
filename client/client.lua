@@ -9,9 +9,9 @@ local event <const> = Game.Events:Register(GAME_EVENT, EVENT_GROUP, function(dat
     local looter <const> = data[1]
     local entity <const> = data[2]
     local is_looted <const> = data[3]
-    if is_looted == 1 and PlayerPedId() == looter then
+    if is_looted == 1 and CACHE.Ped == looter then
         if IsPedHuman(entity) then
-            if Citizen.InvokeNative(0x8DE41E9902E85756, entity) then     -- _IS_ENTITY_FULLY_LOOTED
+            if Citizen.InvokeNative(0x8DE41E9902E85756, entity) then -- _IS_ENTITY_FULLY_LOOTED
                 local netid <const> = NetworkGetNetworkIdFromEntity(entity)
                 if not lootedNpcs[netid] then
                     lootedNpcs[netid] = true

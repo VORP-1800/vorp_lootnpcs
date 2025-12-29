@@ -51,5 +51,5 @@ Config.weapons = {
 }
 
 return {
-  Config = Config
+    Config = Config
 }
