@@ -1,4 +1,5 @@
-Config = {}
+---@class vorp_loot
+local Config = {}
 
 -- Language setting - English | Portuguese_PT | Portuguese_BR | French | German | Spanish
 Lang = "Spanish"
@@ -47,4 +48,8 @@ Config.weapons = {
     { name = "WEAPON_REVOLVER_CATTLEMAN", label = "Cattleman Revolver" },
     { name = "WEAPON_REPEATER_CARBINE",   label = "Carbine Repeater" },
     { name = "WEAPON_RIFLE_VARMINT",      label = "Varmint Rifle" }
+}
+
+return {
+    Config = Config
 }

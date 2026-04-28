@@ -1,8 +1,14 @@
+local LIB <const>    = Import({ '/config', '/translation' })
+local Config <const> = LIB.Config --[[@as vorp_loot]]
+local T              = LIB.Translation[Config.Lang] --[[@as vorp_loot_translation]]
+if not T then
+    print("Language: " .. Config.Lang .. " not found, using English as default")
+    T = LIB.Translation.English --[[@as vorp_loot_translation]]
+end
+
+
 local Core = exports.vorp_core:GetCore()
-local T = Translation.Langs[Lang]
-local lootedNpcs = {}
-
-
+local lootedNpcs <const> = {}
 
 RegisterServerEvent('npcloot:give_reward', function(netid)
     local _source = source
@@ -37,13 +43,13 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
     local character <const> = user.getUsedCharacter
 
     if Config.canReceiveWeapons then
-        local chance = math.random(1, Config.chanceGettingWeapon)
+        local chance <const> = math.random(1, Config.chanceGettingWeapon)
         if chance < Config.receiveWeapon then
-            local ammo = { ["nothing"] = 0 }
-            local reward1 = Config.weapons
-            local chance1 = math.random(1, #reward1)
+            local ammo <const> = { ["nothing"] = 0 }
+            local reward1 <const> = Config.weapons
+            local chance1 <const> = math.random(1, #reward1)
 
-            local canCarryWeapons = exports.vorp_inventory:canCarryWeapons(_source, 1, nil, Config.weapons[chance1].name)
+            local canCarryWeapons <const> = exports.vorp_inventory:canCarryWeapons(_source, 1, nil, Config.weapons[chance1].name)
             if not canCarryWeapons then
                 return Core.NotifyRightTip(_source, T.invFullWeapon, 3000)
             end
@@ -65,9 +71,9 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
     end
 
     if Config.canReceiveMoney then
-        local chance1 = math.random(1, Config.chanceGettingMoney)
+        local chance1 <const> = math.random(1, Config.chanceGettingMoney)
         if chance1 < Config.receiveMoney then
-            local item_type = math.random(1, #Config.money)
+            local item_type <const> = math.random(1, #Config.money)
             character.addCurrency(0, Config.money[item_type])
 
             if Config.useNotifyRight then
@@ -86,9 +92,9 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
 
 
     if Config.canReceiveGold then
-        local chance2 = math.random(1, Config.chanceGettingGold)
+        local chance2 <const> = math.random(1, Config.chanceGettingGold)
         if chance2 < Config.receiveGold then
-            local item_type = math.random(1, #Config.gold)
+            local item_type <const> = math.random(1, #Config.gold)
             character.addCurrency(1, Config.gold[item_type])
             if Config.useNotifyRight then
                 Core.NotifyRightTip(_source, T.youGot .. Config.gold[item_type] .. T.nugget, 3000)
@@ -105,11 +111,11 @@ RegisterServerEvent('npcloot:give_reward', function(netid)
     end
 
     if Config.canReceiveItems then
-        local chance3 = math.random(1, Config.chanceGettingItem)
+        local chance3 <const> = math.random(1, Config.chanceGettingItem)
         if chance3 < Config.receiveItem then
-            local chance4 = math.random(1, #Config.items)
-            local count = 1
-            local canCarryInv = exports.vorp_inventory:canCarryItem(_source, Config.items[chance4].name, count)
+            local chance4 <const> = math.random(1, #Config.items)
+            local count <const> = 1
+            local canCarryInv <const> = exports.vorp_inventory:canCarryItem(_source, Config.items[chance4].name, count)
             if not canCarryInv then
                 return print("cant carry")
             end
